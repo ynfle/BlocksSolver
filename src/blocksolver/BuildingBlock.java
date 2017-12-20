@@ -2,36 +2,42 @@ package blocksolver;
 
 import java.awt.Point;
 
-public class Vertex {
-	
+public class BuildingBlock {
+
 	private Point point;
-	
-	public Vertex() {
+
+	public BuildingBlock() {
 		this(0, 0);
 	}
-	
-	public Vertex(int x, int y) {
+
+	public BuildingBlock(int x, int y) {
 		this.point = new Point(x, y);
 	}
-	
-	public Vertex(Vertex vert) {
-		this.point = new Point(vert.getX(), vert.getY());
+
+	public BuildingBlock(BuildingBlock block) {
+		this.point = new Point(block.getX(), block.getY());
 	}
 
 	public int getX() {
-		return this.point.x;
+		return (int) this.point.getX();
 	}
-	
+
 	public int getY() {
-		return this.point.y;
+		return (int) this.point.getY();
 	}
-	
+
 	public int[] getLocation() {
-		int[] result = {this.getX(), this.getY()};
+		int[] result = { this.getX(), this.getY() };
 		return result;
 	}
-	
-	/* (non-Javadoc)
+
+	public void move(int x, int y) {
+		this.point.move(x, y);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -42,7 +48,9 @@ public class Vertex {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -51,28 +59,30 @@ public class Vertex {
 			return true;
 		}
 		if (obj == null) {
-			return false; 
+			return false;
 		}
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Vertex other = (Vertex) obj;
+		BuildingBlock other = (BuildingBlock) obj;
 		if (point == null) {
 			if (other.point != null) {
 				return false;
 			}
-		} else if (!point.equals(other.point)){
+		} else if (!point.equals(other.point)) {
 			return false;
 		}
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "[" + this.point.x + ", " + this.point.y + "]";
 	}
-	
+
 }
