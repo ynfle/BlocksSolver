@@ -4,30 +4,30 @@ import java.util.*;
 
 public class Block {
 	private Vertex origin;
-	private Vertex[] vertices;
+	private List<Vertex> vertices;
 	
 	public Block() {
 		this.origin = new Vertex();
-		this.vertices = new Vertex[4];
-		this.vertices[0] = this.origin;
-		this.vertices[1] = new Vertex(0, 1);
-		this.vertices[2] = new Vertex(1, 1);
-		this.vertices[3] = new Vertex(1, 0);
+		this.vertices = new ArrayList<>();
+		this.vertices.add(this.origin);
+		this.vertices.add(new Vertex(0, 1));
+		this.vertices.add(new Vertex(1, 1));
+		this.vertices.add(new Vertex(1, 0));
 	}
 	
 	public Block(Vertex[] vertices) {
 		this.origin = new Vertex();
-		this.vertices = new Vertex[vertices.length];
+		this.vertices = new ArrayList<>();
 		for (int i = 0; i < vertices.length; i++) {
-			this.vertices[i] = new Vertex(vertices[i]);
+			this.vertices.add(new Vertex(vertices[i]));
 		}
 	}
 	
 	public Block(List<Vertex> vertices) {
 		this.origin = new Vertex();
-		this.vertices = new Vertex[vertices.size()];
+		this.vertices = new ArrayList<>();
 		for (int i = 0; i < vertices.size(); i++) {
-			this.vertices[i] = new Vertex(vertices.get(i));
+			this.vertices.add(new Vertex(vertices.get(i)));
 		}
 	}
 	
@@ -37,16 +37,17 @@ public class Block {
 	
 	public Block(Block other) {
 		this.origin = new Vertex();
-		this.vertices = new Vertex[other.vertices.length];
-		for (int i = 0; i < other.vertices.length; i++) {
-			this.vertices[i] = new Vertex(other.vertices[i]);
+		this.vertices = new ArrayList<>();
+		for (int i = 0; i < other.vertices.size(); i++) {
+			this.vertices.add(new Vertex(other.vertices.get(i)));
 		}
 	}
 	
-	public Vertex[] getVertices() {
-		Vertex[] result = new Vertex[this.vertices.length];
-		for (int i = 0; i < this.vertices.length; i++) {
-			result[i] = new Vertex(vertices[i]);
+	public List<Vertex> getVertices() {
+		this.origin = new Vertex();
+		List<Vertex> result = new ArrayList<>();
+		for (int i = 0; i < this.vertices.size(); i++) {
+			result.add(new Vertex(vertices.get(i)));
 		}
 		return result;
 	}
@@ -79,9 +80,9 @@ public class Block {
 				return false;
 		} else {
 			Set<Vertex> thisHash = new HashSet<>();
-			thisHash.addAll(Arrays.asList(this.vertices));
+			thisHash.addAll(this.vertices);
 			Set<Vertex> otherHash = new HashSet<>();
-			otherHash.addAll(Arrays.asList(other.vertices));
+			otherHash.addAll(other.vertices);
 			if (!thisHash.equals(otherHash))
 				return false;
 		}
